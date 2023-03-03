@@ -1,0 +1,17 @@
+{
+    "name": "fauzan-achmad/spp",
+    "autoload": {
+        "psr-4": {
+            "Src\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Fauzan Achmad Ali Safitra",
+            "email": "nmeylani49@gmail.com"
+        }
+    ],
+    "require": {
+        "vlucas/phpdotenv": "^5.5"
+    }
+}
