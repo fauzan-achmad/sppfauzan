@@ -140,6 +140,7 @@ if ($position) {
  */
 
 $guardedPages = [
+    '/dashboard',
     '/officers',
     '/officers/create',
     '/officers/detail',
@@ -313,7 +314,6 @@ if ($url !== '/') {
      * 
      */
 
-
     if (in_array($url, $guardedPages)) {
 
         /**
@@ -378,6 +378,7 @@ if ($url !== '/') {
     //         die();
     //     }
     // }
+
     /**
      * Cek ketersediaan file.
      * 
