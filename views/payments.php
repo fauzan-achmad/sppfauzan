@@ -91,7 +91,7 @@ while ($row = $result->fetch_assoc()) {
                                 <select class="form-control selectric" name="month_payment" required>
                                     <option selected disabled>Pilih Bulan</option>
                                     <?php foreach ($month as $mont) { ?>
-                                        <option value="<?php echo $mont['id'] ?>">
+                                        <option value="<?php echo $mont['name'] ?>">
                                             <?php echo $mont['name'] ?>
                                         </option>
                                     <?php } ?>

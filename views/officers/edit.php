@@ -35,7 +35,7 @@ if (!$officer) {
             <div class="col-12">
                 <div class="card card-success">
                     <div class="card-header">
-                        <h4>Edit Petugas Baru</h4>
+                        <h4>Edit Petugas</h4>
                     </div>
                     <div class="card-body">
 

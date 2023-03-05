@@ -20,7 +20,7 @@ WHERE id = ?", [$officerId]);
 
 
 $_SESSION['FLASH_MESSAGE']['success'] = [
-    'value' => 'Berhasil mengubah data Siswa.',
+    'value' => 'Berhasil mengubah data Petugas.',
     'called' => false,
 ];
 
