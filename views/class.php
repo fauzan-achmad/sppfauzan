@@ -79,7 +79,7 @@ $iteration = 1;
                                                             <i class="fas fa-pen"></i>
                                                         </a>
                                                         <form action="<?php echo url('actions/class/delete') ?>" method="post">
-                                                            <input type="hidden" name="user_id" value="<?php echo $clas['user_id'] ?>">
+                                                            <input type="hidden" name="id" value="<?php echo $clas['id'] ?>">
                                                             <button type="submit" class="btn btn-light" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">
                                                                 <i class="fas fa-trash"></i>
                                                             </button>
