@@ -4,9 +4,7 @@ global $connection;
 
 $id = (int) $_GET['id'];
 
-
-
-$result = $connection->execute_query("SELECT * FROM class");
+$result = $connection->execute_query("SELECT * FROM class WHERE id = ?", [$id]);
 $clas = $result->fetch_assoc();
 
 if (!$clas) {
@@ -63,7 +61,7 @@ while ($row = $result1->fetch_assoc()) {
                                 <select class="form-control selectric" name="name" required>
                                     <option selected disabled>Pilih Kelas</option>
                                     <?php foreach ($kelas as $mont) { ?>
-                                        <option value="<?php echo $mont['name'] ?>">
+                                        <option value="<?php echo $mont['name'] ?>" <?php echo $mont['name'] == $clas['name'] ? 'selected' : '' ?>>
                                             <?php echo $mont['name'] ?>
                                         </option>
                                     <?php } ?>
