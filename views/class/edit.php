@@ -79,7 +79,6 @@ while ($row = $result1->fetch_assoc()) {
                                 </div>
                             </div>
 
-
                             <div class="col-12 d-flex justify-content-end">
                                 <button type="submit" class="btn btn-primary btn-lg" tabindex="4">
                                     Edit
