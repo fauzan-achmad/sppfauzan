@@ -264,6 +264,21 @@ $actions = [
         require_once __DIR__ . '/../actions/class/delete.php';
         die();
     },
+
+    '/actions/spps/store' => function () {
+        require_once __DIR__ . '/../actions/spps/store.php';
+        die();
+    },
+
+    '/actions/spps/update' => function () {
+        require_once __DIR__ . '/../actions/spps/update.php';
+        die();
+    },
+
+    '/actions/spps/delete' => function () {
+        require_once __DIR__ . '/../actions/spps/delete.php';
+        die();
+    },
 ];
 
 /**

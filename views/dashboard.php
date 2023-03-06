@@ -1,3 +1,50 @@
+<?php
+
+global $connection;
+
+/**
+ * Mengambil semua siswa.
+ * 
+ */
+
+$students = [];
+
+$result = $connection->execute_query("SELECT * FROM students");
+$result2 = $connection->execute_query("SELECT * FROM officers");
+$result3 = $connection->execute_query("SELECT * FROM class");
+$result4 = $connection->execute_query("SELECT * FROM spps");
+
+$totalStudents = mysqli_num_rows($result);
+$totalOfficers = mysqli_num_rows($result2);
+$totalClass = mysqli_num_rows($result3);
+$totalSpps = mysqli_num_rows($result4);
+
+
+/**
+ * Mengambil semua siswa.
+ * 
+ */
+
+$payments = [];
+
+$result5 = $connection->execute_query("SELECT payments.*,
+students.name AS student_name,
+officers.name AS officers_name
+ FROM payments
+ LEFT JOIN students ON payments.student_id = students.id
+ LEFT JOIN officers ON payments.officer_id = officers.id
+ ORDER BY payments.id DESC");
+
+while ($row = $result5->fetch_assoc()) {
+
+    array_push($payments, $row);
+}
+
+$iteration = 1;
+
+?>
+
+
 <?php if ($_SESSION['user']['role'] === 'admin') { ?> <!-- Jika role user adalah admin -->
 
 
@@ -27,7 +74,107 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                    <div class="card card-statistic-1">
+                        <div class="card-icon bg-primary">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="card-wrap">
+                            <div class="card-header">
+                                <h4>Total Siswa</h4>
+                            </div>
+                            <div class="card-body">
+                                <?php echo $totalStudents ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                    <div class="card card-statistic-1">
+                        <div class="card-icon bg-danger">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="card-wrap">
+                            <div class="card-header">
+                                <h4>Total Petugas</h4>
+                            </div>
+                            <div class="card-body">
+                                <?php echo $totalOfficers ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                    <div class="card card-statistic-1">
+                        <div class="card-icon bg-warning">
+                            <i class="fas fa-school"></i>
+                        </div>
+                        <div class="card-wrap">
+                            <div class="card-header">
+                                <h4>Total kelas</h4>
+                            </div>
+                            <div class="card-body">
+                                <?php echo $totalClass ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                    <div class="card card-statistic-1">
+                        <div class="card-icon bg-success">
+                            <i class="fa-sharp fas fa-file-invoice-dollar"></i>
+                        </div>
+                        <div class="card-wrap">
+                            <div class="card-header">
+                                <h4>Total Spp</h4>
+                            </div>
+                            <div class="card-body">
+                                <?php echo $totalSpps ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="card ">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h4>History Pembayaran</h4>
+                        </div>
+                        <div class="card-body">
 
+                            <?php if (hasFlash('success')) { ?>
+                                <div class="alert alert-success">
+                                    <?php echo flash('success') ?>
+                                </div>
+                            <?php } ?>
+
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Nama Petugas</th>
+                                            <th>Nama Siswa</th>
+                                            <th>Tanggal Bayar</th>
+                                            <th>Nominal</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php foreach ($payments as $payment) { ?>
+                                            <tr>
+                                                <td><?php echo $iteration++ ?></td>
+                                                <th><?php echo $payment['officers_name'] ?></th>
+                                                <td><?php echo $payment['student_name'] ?></td>
+                                                <td><?php echo $payment['date_payment'] ?></td>
+                                                <td>RP. <?php echo number_format($payment['payment_amount']) ?> </td>
+                                            </tr>
+                                        <?php } ?>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
             </div>
 
 
@@ -76,7 +223,7 @@
 
     <?php topbar() ?>
 
-
+    <?php sidebar() ?>
 
     <!-- Main Content -->
     <div class="main-content">

@@ -101,14 +101,13 @@ while ($row = $result->fetch_assoc()) {
                                 </div>
                             </div>
 
-                            <div class="form-group col-md-6">
+                            <div class="form-group col-md-2">
                                 <label>Tahun</label>
-                                <select class="form-control selectric" name="year_payment" required>
+                                <select class="form-control" name="year_payment" required>
                                     <option selected disabled>Pilih Tahun</option>
                                     <?php foreach ($spps as $spp) { ?>
-                                        <option value="<?php echo $spp['id'] ?>">
-                                            <?php echo $spp['year'] ?> -
-                                            RP.<?php echo $spp['nominal'] ?>
+                                        <option class="tahun-spp" data-nominal="<?php echo $spp['nominal'] ?>" value="<?php echo $spp['year'] ?>">
+                                            <?php echo $spp['year'] ?>
                                         </option>
                                     <?php } ?>
                                 </select>
@@ -117,14 +116,30 @@ while ($row = $result->fetch_assoc()) {
                                 </div>
                             </div>
 
-
-                            <div class="form-group col-md-12">
-                                <label>Jumlah Dibayar</label>
-                                <input type="text" class="form-control " name="phone" required>
-                                <div class="invalid-feedback">
-                                    Silahkan isi Jumlah Dibayar.
+                            <div class="form-group col-md-4">
+                                <label>Nominal</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                            Rp
+                                        </div>
+                                    </div>
+                                    <input type="text" class="form-control" name="payment_ammount" disabled value="">
                                 </div>
                             </div>
+
+                            <div class="form-group col-md-12">
+                                <label>Jumlah Bayar</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                            Rp
+                                        </div>
+                                    </div>
+                                    <input type="text" class="form-control" name="payment_ammount">
+                                </div>
+                            </div>
+
 
 
                             <div class="col-12 d-flex justify-content-end">
@@ -142,3 +157,20 @@ while ($row = $result->fetch_assoc()) {
     </section>
 
 </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const year = document.querySelector("select[name=year_payment]");
+
+        year.addEventListener("change", function(e) {
+            const value = e.target.value;
+
+            const option = document.querySelector(`option[value='${value}']`)
+            const price = option.getAttribute('data-nominal')
+
+            const amount = document.querySelector(`input[name=payment_ammount]`)
+
+            amount.value = price
+        })
+    });
+</script>

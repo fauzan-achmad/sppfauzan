@@ -8,11 +8,11 @@ $name = htmlspecialchars($_POST['name'] ?? null);
 $phone = htmlspecialchars($_POST['phone'] ?? null);
 $address = htmlspecialchars($_POST['address'] ?? null);
 $class_id = htmlspecialchars($_POST['class_id'] ?? null);
-$password = htmlspecialchars($_POST['nis'] ?? null);
+
 
 $nis = $nis !== "" ? $nis : null;
 
-$password = password_hash($password, PASSWORD_DEFAULT);
+$password = password_hash("123456", PASSWORD_DEFAULT);
 
 
 

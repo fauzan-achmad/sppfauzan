@@ -46,7 +46,7 @@
                 </li>
 
                 <li>
-                    <a class="nav-link" href="<?php echo url('spp') ?>">
+                    <a class="nav-link" href="<?php echo url('spps') ?>">
                         <i class="fa-sharp fas fa-file-invoice-dollar"></i>
                         <span>Data Spp</span>
                     </a>

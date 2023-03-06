@@ -39,11 +39,11 @@ $iteration = 1;
             <div class="col-12">
                 <div class="card card-success">
                     <div class="card-header d-flex justify-content-between align-items-center">
-                        <h4>Daftar spp</h4>
+                        <h4>Daftar Spp</h4>
                         <div>
                             <a href="<?php echo url('spps/create') ?>" class="btn btn-primary">
                                 <i class="fas fa-plus"></i>
-                                <span>Tambah spp</span>
+                                <span>Tambah Spp</span>
                             </a>
                         </div>
                     </div>
@@ -70,7 +70,7 @@ $iteration = 1;
                                         <tr>
                                             <td><?php echo $iteration++ ?></td>
                                             <td><?php echo $spp['year'] ?></td>
-                                            <td>RP.<?php echo $spp['nominal'] ?></td>
+                                            <td>RP.<?php echo number_format($spp['nominal']) ?></td>
                                             <td>
                                                 <div class="d-flex align-items-center" style="gap: 1rem">
 
@@ -78,7 +78,7 @@ $iteration = 1;
                                                         <i class="fas fa-pen"></i>
                                                     </a>
                                                     <form action="<?php echo url('actions/spps/delete') ?>" method="post">
-                                                        <input type="hidden" name="user_id" value="<?php echo $spp['user_id'] ?>">
+                                                        <input type="hidden" name="id" value="<?php echo $spp['id'] ?>">
                                                         <button type="submit" class="btn btn-light" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">
                                                             <i class="fas fa-trash"></i>
                                                         </button>
