@@ -70,7 +70,7 @@ $iteration = 1;
                                     <?php foreach ($payments as $payment) { ?>
                                         <tr>
                                             <td><?php echo $iteration++ ?></td>
-                                            <th><?php echo $payment['officers_name'] ?></th>
+                                            <th><?php echo $payment['officers_name'] ?? 'Admin' ?></th>
                                             <td><?php echo $payment['student_name'] ?></td>
                                             <td><?php echo $payment['date_payment'] ?></td>
                                             <td>

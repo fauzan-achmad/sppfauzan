@@ -181,7 +181,7 @@ $iteration = 1;
         </section>
     </div>
 
-<?php } elseif ($_SESSION['user']['role'] === 'officers') { ?> <!-- Jika role user selain admin -->
+<?php } elseif ($_SESSION['user']['role'] === 'officer') { ?> <!-- Jika role user selain admin -->
 
     <div class="navbar-bg"></div>
 

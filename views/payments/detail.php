@@ -101,7 +101,7 @@ $literation = 1;
                             <br>
                             <br>
                             <div class="col-12 d-flex justify-content">
-                                <b>Petugas : <?php echo $payment['officer_name'] ?></b>
+                                <b>Petugas : <?php echo $payment['officer_name'] ?? 'Admin' ?></b>
                             </div>
                         </div>
 

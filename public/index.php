@@ -155,6 +155,11 @@ $guardedPages = [
     '/history',
 ];
 
+$adminOrOfficerPages = [
+    '/payments',
+    '/history',
+];
+
 /**
  * Daftar halaman yang tidak boleh menggunakan akses login.
  * 
@@ -180,8 +185,6 @@ $adminPages = [
     '/students/edit',
     '/students/detail',
     '/spp',
-    '/payments',
-    '/history',
 ];
 
 /**
@@ -392,14 +395,23 @@ if ($url !== '/') {
      * 
      */
 
-    // if (in_array($url, $adminPages)) {
+    if (in_array($url, $adminPages)) {
 
-    //     if (isset($_SESSION['user']) && $_SESSION['user']['role'] !== 'admin') {
+        if (isset($_SESSION['user']) && $_SESSION['user']['role'] !== 'admin') {
 
-    //         header('Location: ' . env('APP_URL') . '/403');
-    //         die();
-    //     }
-    // }
+            header('Location: ' . env('APP_URL') . '/403');
+            die();
+        }
+    }
+
+    if (in_array($url, $adminOrOfficerPages)) {
+
+        if (isset($_SESSION['user']) && ($_SESSION['user']['role'] !== 'admin' && $_SESSION['user']['role'] !== 'officer')) {
+
+            header('Location: ' . env('APP_URL') . '/403');
+            die();
+        }
+    }
 
     // if (in_array($url, $officerPages)) {
 
