@@ -235,6 +235,11 @@ $actions = [
         die();
     },
 
+    '/actions/students/change' => function () {
+        require_once __DIR__ . '/../actions/students/change.php';
+        die();
+    },
+
     '/actions/officers/store' => function () {
         require_once __DIR__ . '/../actions/officers/store.php';
         die();
@@ -277,6 +282,11 @@ $actions = [
 
     '/actions/spps/delete' => function () {
         require_once __DIR__ . '/../actions/spps/delete.php';
+        die();
+    },
+
+    '/actions/payments/store' => function () {
+        require_once __DIR__ . '/../actions/payments/store.php';
         die();
     },
 ];
@@ -382,14 +392,14 @@ if ($url !== '/') {
      * 
      */
 
-    if (in_array($url, $adminPages)) {
+    // if (in_array($url, $adminPages)) {
 
-        if (isset($_SESSION['user']) && $_SESSION['user']['role'] !== 'admin') {
+    //     if (isset($_SESSION['user']) && $_SESSION['user']['role'] !== 'admin') {
 
-            header('Location: ' . env('APP_URL') . '/403');
-            die();
-        }
-    }
+    //         header('Location: ' . env('APP_URL') . '/403');
+    //         die();
+    //     }
+    // }
 
     // if (in_array($url, $officerPages)) {
 
