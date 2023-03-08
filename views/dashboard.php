@@ -165,7 +165,7 @@ $iteration = 1;
                                                 <th><?php echo $payment['officers_name'] ?></th>
                                                 <td><?php echo $payment['student_name'] ?></td>
                                                 <td><?php echo $payment['date_payment'] ?></td>
-                                                <td>RP. <?php echo number_format($payment['payment_amount']) ?> </td>
+                                                <td>RP. <?php echo number_format((int) $payment['payment_amount']) ?> </td>\
                                             </tr>
                                         <?php } ?>
                                     </tbody>

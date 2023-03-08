@@ -126,7 +126,7 @@ while ($row = $result->fetch_assoc()) {
                                             Rp
                                         </div>
                                     </div>
-                                    <input type="text" class="form-control currency" name="payment_ammount" disabled value="<?php echo $spp['id'] ?>">
+                                    <input type="text" class="form-control currency" name="nominal" disabled value="<?php echo $spp['id'] ?>">
                                 </div>
                             </div>
 
@@ -138,7 +138,7 @@ while ($row = $result->fetch_assoc()) {
                                             Rp
                                         </div>
                                     </div>
-                                    <input type="text" class="form-control currency" name="payment">
+                                    <input type="text" class="form-control currency" name="payment_ammount">
                                 </div>
                             </div>
 
