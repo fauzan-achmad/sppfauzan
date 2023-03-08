@@ -9,6 +9,10 @@ $phone = htmlspecialchars($_POST['phone'] ?? null);
 $address = htmlspecialchars($_POST['address'] ?? null);
 $class_id = htmlspecialchars($_POST['class_id'] ?? null);
 
+$username = "S$nisn";
+
+// var_dump($username);
+// die();
 
 $nis = $nis !== "" ? $nis : null;
 
@@ -42,7 +46,7 @@ if ($checknis || $checknisn) {
 
 $query = $connection->execute_query("INSERT INTO users (name, username, password, role) VALUES (
     ?, ?, ?, ?
-)", [$name, $nisn, $password, 'student']);
+)", [$name, $username, $password, 'student']);
 
 $userId = $connection->insert_id;
 

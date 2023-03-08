@@ -23,7 +23,7 @@ $userId = $user['id'];
 
         <div class="row">
 
-            <div class="<?php echo $user['role'] === 'employee' ? 'col-md-6' : 'col-12' ?>">
+            <div class="<?php echo $user['role'] === 'student' ? 'col-md-6' : 'col-12' ?>">
 
                 <div class="card">
                     <div class="card-header">

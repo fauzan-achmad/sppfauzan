@@ -63,7 +63,6 @@ $iteration = 1;
                                         <th>Nama Petugas</th>
                                         <th>Nama Siswa</th>
                                         <th>Tanggal Bayar</th>
-                                        <th>Nominal</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -74,7 +73,6 @@ $iteration = 1;
                                             <th><?php echo $payment['officers_name'] ?></th>
                                             <td><?php echo $payment['student_name'] ?></td>
                                             <td><?php echo $payment['date_payment'] ?></td>
-                                            <td>RP. <?php echo number_format($payment['payment_amount']) ?> </td>
                                             <td>
                                                 <div class="d-flex align-items-center" style="gap: 1rem">
                                                     <a href="<?php echo url('payments/detail?id=' . $payment['id']) ?>" class="btn btn-info">

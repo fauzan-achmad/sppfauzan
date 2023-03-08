@@ -2,52 +2,35 @@
 
 global $connection;
 
-$name = htmlspecialchars($_POST['name'] ?? null);
-$nis = htmlspecialchars($_POST['nis'] ?? null);
-$name = htmlspecialchars($_POST['name'] ?? null);
-$phone = htmlspecialchars($_POST['phone'] ?? null);
-$address = htmlspecialchars($_POST['address'] ?? null);
-$class_id = htmlspecialchars($_POST['class_id'] ?? null);
+$student_id = htmlspecialchars($_POST['student_id'] ?? null);
+$date_payment = htmlspecialchars($_POST['date_payment'] ?? null);
+$month_payment = htmlspecialchars($_POST['month_payment'] ?? null);
+$year_payment = htmlspecialchars($_POST['year_payment'] ?? null);
+$payment_ammount = htmlspecialchars($_POST['payment_ammount'] ?? null);
+$user_id = $_SESSION['user']['id'];
+$nominal = htmlspecialchars($_POST['nominal'] ?? null);
 
-$nis = $nis !== "" ? $nis : null;
+$query = $connection->execute_query("SELECT * FROM officers WHERE user_id = ?", [$user_id]);
+$officer = $query->fetch_assoc();
 
+$query = $connection->execute_query("SELECT * FROM spps WHERE year = ?", [$year_payment]);
+$spp = $query->fetch_assoc();
 
-
-
-
-
-/**
- * Memeriksa unique attribute.
- * 
- */
-
-$checknisn = $connection->execute_query("SELECT * FROM students WHERE nisn = ? LIMIT 1", [$nisn])->fetch_assoc();
-
-$checknis = $connection->execute_query("SELECT * FROM students WHERE nis = ? LIMIT 1", [$nis])->fetch_assoc();
+$officerId = $officer['id'];
+$sppId = $spp['id'];
 
 
 
 
-if ($checknis || $checknisn) {
 
-    $_SESSION['FLASH_MESSAGE']['error'] = [
-        'value' => 'Data Murid telah terdaftar.',
-        'called' => false,
-    ];
 
-    header('Location: ' . env('APP_URL') . '/students/create');
-    die();
-}
 
-$query = $connection->execute_query("INSERT INTO users (name, username, password, role) VALUES (
-    ?, ?, ?, ?
-)", [$name, $nisn, $password, 'student']);
 
-$userId = $connection->insert_id;
 
-$query = $connection->execute_query("INSERT INTO students (
-    nisn, nis, name,address, phone, class_id, user_id
-) VALUES (?, ?, ?, ?, ?, ?,?)", [$nisn, $nis, $name, $address, $phone, $class_id, $connection->insert_id]);
+$query = $connection->execute_query("INSERT INTO payments (date_payment, month_paid, year_paid, payment_amount, student_id ,officer_id, spp_id) VALUES (
+    ?, ?, ?, ?, ?, ?, ?
+)", [$date_payment, $month_payment, $year_payment, $payment_ammount, $student_id, $officerId, $sppId]);
+
 
 
 
@@ -59,5 +42,5 @@ $_SESSION['FLASH_MESSAGE']['success'] = [
     'called' => false,
 ];
 
-header('Location: ' . env('APP_URL') . '/students');
+header('Location: ' . env('APP_URL') . '/history');
 die();

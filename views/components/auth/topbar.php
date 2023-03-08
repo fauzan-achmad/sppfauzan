@@ -1,3 +1,25 @@
+<?php
+global $connection;
+
+/**
+ * Mengambil semua siswa.
+ * 
+ */
+
+$students = [];
+
+$result = $connection->execute_query("SELECT students.*,
+class.name AS class_name,
+class.category AS class_category
+ FROM students
+ LEFT JOIN class ON students.class_id = class.id
+ ORDER BY students.id DESC");
+
+while ($row = $result->fetch_assoc()) {
+
+    array_push($students, $row);
+} ?>
+
 <nav class="navbar navbar-expand-lg  main-navbar">
 
     <form class="form-inline mr-auto">
@@ -18,6 +40,13 @@
 
                 <a href="<?php echo url('profile') ?>" class="dropdown-item has-icon">
                     <i class="far fa-user"></i> Profile
+                </a>
+
+                <div class="dropdown-divider"></div>
+
+
+                <a href="<?php echo url('students/change-password?id=' . $students['id']) ?>" class="dropdown-item has-icon">
+                    <i class="fas fa-key"></i> Ubah Password
                 </a>
 
                 <div class="dropdown-divider"></div>

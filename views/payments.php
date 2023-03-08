@@ -2,6 +2,8 @@
 
 global $connection;
 
+
+
 $result = $connection->execute_query("SELECT * FROM students");
 
 $students = [];
@@ -60,11 +62,11 @@ while ($row = $result->fetch_assoc()) {
                             </div>
                         <?php } ?>
 
-                        <form action="<?php echo url('actions/students/store') ?>" class="needs-validation row" novalidate="" method="POST">
+                        <form action="<?php echo url('actions/payments/store') ?>" class="needs-validation row" novalidate="" method="POST">
 
                             <div class="form-group col-md-6">
                                 <label>Nama</label>
-                                <select class="form-control selectric" name="name" required>
+                                <select class="form-control selectric" name="student_id" required>
                                     <option selected disabled>Pilih Nama</option>
                                     <?php foreach ($students as $student) { ?>
                                         <option value="<?php echo $student['id'] ?>">
@@ -124,7 +126,7 @@ while ($row = $result->fetch_assoc()) {
                                             Rp
                                         </div>
                                     </div>
-                                    <input type="text" class="form-control" name="payment_ammount" disabled value="">
+                                    <input type="text" class="form-control currency" name="payment_ammount" disabled value="<?php echo $spp['id'] ?>">
                                 </div>
                             </div>
 
@@ -136,7 +138,7 @@ while ($row = $result->fetch_assoc()) {
                                             Rp
                                         </div>
                                     </div>
-                                    <input type="text" class="form-control" name="payment_ammount">
+                                    <input type="text" class="form-control currency" name="payment">
                                 </div>
                             </div>
 

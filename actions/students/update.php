@@ -25,8 +25,8 @@ $class_id = htmlspecialchars($_POST['class_id'] ?? null);
 $nis = $nis !== "" ? $nis : null;
 
 $query = $connection->execute_query("UPDATE users SET 
-        name = '$name', username = '$nisn', password = ? 
-        WHERE id = ?", [$nis, $userId]);
+        name = '$name', username = 'S$nisn'
+        WHERE id = ?", [$userId]);
 $query = $connection->execute_query("UPDATE students SET 
 nisn = '$nisn', 
 nis = ?, 
