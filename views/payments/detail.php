@@ -9,11 +9,13 @@ $result = $connection->execute_query("SELECT payments.*,
 students.name AS student_name,
 students.nis AS student_nis,
 officers.name AS officer_name,
+spps.nominal AS spp_nominal,
 class.*, class.id AS class_id, class.name AS class_name, class.category AS class_category
  FROM payments
  LEFT JOIN officers ON payments.officer_id = officers.id
  LEFT JOIN students ON payments.student_id = students.id
  LEFT JOIN class ON students.class_id = class.id
+ LEFT JOIN spps ON payments.spp_id = spps.id
  WHERE payments.id = ?
  LIMIT 1", [$id]);
 
@@ -50,7 +52,7 @@ $literation = 1;
 
                 <div class="card">
                     <div class="card-header">
-                        <h4>Data Siswa</h4>
+                        <h4>Detail Pembayaran</h4>
                     </div>
                     <div class="card-body">
 
@@ -74,7 +76,7 @@ $literation = 1;
                                 </tr>
                                 <tr>
                                     <th>Jumlah Spp</th>
-                                    <td class="border-top border-light"><?php echo $payment[''] ?? '-' ?></td>
+                                    <td class="border-top border-light"><?php echo $payment['spp_nominal'] ?? '-' ?></td>
                                 </tr>
 
                             </table>
@@ -93,7 +95,7 @@ $literation = 1;
                                             <td><?php echo $literation++ ?></td>
                                             <td><?php echo $payment['date_payment'] ?></td>
                                             <td>RP. <?php echo number_format($payment['payment_amount']) ?> </td>
-                                            <td></td>
+                                            <td><?php echo $payment['month_paid'] ?></td>
                                         </tr>
                                     </tbody>
                                 </table>

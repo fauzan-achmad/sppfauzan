@@ -45,7 +45,7 @@ while ($row = $result->fetch_assoc()) {
                 <div class="dropdown-divider"></div>
 
 
-                <a href="<?php echo url('students/change-password?id=' . $students['id']) ?>" class="dropdown-item has-icon">
+                <a href="<?php echo url('user/change-password') ?>" class="dropdown-item has-icon">
                     <i class="fas fa-key"></i> Ubah Password
                 </a>
 

@@ -150,9 +150,19 @@ $guardedPages = [
     '/students/create',
     '/students/edit',
     '/students/detail',
-    '/spp',
+    '/spps',
+    '/spps/create',
+    '/spps/edit',
+    '/spps/detail',
     '/payments',
-    '/history',
+    '/payments/create',
+    '/payments/edit',
+    '/payments/detail',
+    '/class',
+    '/class/create',
+    '/class/edit',
+    '/class/detail',
+    '/reports'
 ];
 
 $adminOrOfficerPages = [
@@ -184,7 +194,19 @@ $adminPages = [
     '/students/create',
     '/students/edit',
     '/students/detail',
-    '/spp',
+    '/spps',
+    '/spps/create',
+    '/spps/edit',
+    '/spps/detail',
+    '/payments',
+    '/payments/create',
+    '/payments/edit',
+    '/payments/detail',
+    '/class',
+    '/class/create',
+    '/class/edit',
+    '/class/detail',
+    '/reports'
 ];
 
 /**
@@ -238,8 +260,8 @@ $actions = [
         die();
     },
 
-    '/actions/students/change' => function () {
-        require_once __DIR__ . '/../actions/students/change.php';
+    '/actions/user/change' => function () {
+        require_once __DIR__ . '/../actions/user/change.php';
         die();
     },
 

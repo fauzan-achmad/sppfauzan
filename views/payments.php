@@ -126,7 +126,7 @@ while ($row = $result->fetch_assoc()) {
                                             Rp
                                         </div>
                                     </div>
-                                    <input type="text" class="form-control currency" name="nominal" disabled value="<?php echo $spp['id'] ?>">
+                                    <input type="text" class="form-control currency" name="nominal" disabled value="">
                                 </div>
                             </div>
 
@@ -170,7 +170,7 @@ while ($row = $result->fetch_assoc()) {
             const option = document.querySelector(`option[value='${value}']`)
             const price = option.getAttribute('data-nominal')
 
-            const amount = document.querySelector(`input[name=payment_ammount]`)
+            const amount = document.querySelector(`input[name=nominal]`)
 
             amount.value = price
         })

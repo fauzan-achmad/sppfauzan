@@ -2,6 +2,9 @@
 
 global $connection;
 
+$user = $_SESSION['user'];
+$userId = $user['id'];
+
 /**
  * Mengambil semua siswa.
  * 
@@ -134,51 +137,44 @@ $iteration = 1;
                         </div>
                     </div>
                 </div>
+
                 <div class="col-12">
                     <div class="card ">
                         <div class="card-header d-flex justify-content-between align-items-center">
                             <h4>History Pembayaran</h4>
                         </div>
-                        <div class="card-body">
 
-                            <?php if (hasFlash('success')) { ?>
-                                <div class="alert alert-success">
-                                    <?php echo flash('success') ?>
-                                </div>
-                            <?php } ?>
 
-                            <div class="table-responsive">
-                                <table class="table table-striped">
-                                    <thead>
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Nama Petugas</th>
+                                        <th>Nama Siswa</th>
+                                        <th>Tanggal Bayar</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php foreach ($payments as $payment) { ?>
                                         <tr>
-                                            <th>No</th>
-                                            <th>Nama Petugas</th>
-                                            <th>Nama Siswa</th>
-                                            <th>Tanggal Bayar</th>
-                                            <th>Nominal</th>
+                                            <td><?php echo $iteration++ ?></td>
+                                            <th><?php echo $payment['officers_name'] ?? 'Admin' ?></th>
+                                            <td><?php echo $payment['student_name'] ?></td>
+                                            <td><?php echo $payment['date_payment'] ?></td>
                                         </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php foreach ($payments as $payment) { ?>
-                                            <tr>
-                                                <td><?php echo $iteration++ ?></td>
-                                                <th><?php echo $payment['officers_name'] ?></th>
-                                                <td><?php echo $payment['student_name'] ?></td>
-                                                <td><?php echo $payment['date_payment'] ?></td>
-                                                <td>RP. <?php echo number_format((int) $payment['payment_amount']) ?> </td>\
-                                            </tr>
-                                        <?php } ?>
-                                    </tbody>
-                                </table>
-                            </div>
-
+                                    <?php } ?>
+                                </tbody>
+                            </table>
                         </div>
+
                     </div>
                 </div>
             </div>
+    </div>
 
 
-        </section>
+    </section>
     </div>
 
 <?php } elseif ($_SESSION['user']['role'] === 'officer') { ?> <!-- Jika role user selain admin -->
@@ -207,10 +203,48 @@ $iteration = 1;
                         <div class="card-body">
                             <p>Selamat datang kembali, <?php echo $_SESSION['user']['name'] ?>.</p>
                         </div>
-                    </div>
-                </div>
+                        <div class="card-body">
 
-            </div>
+                            <?php if (hasFlash('success')) { ?>
+                                <div class="alert alert-success">
+                                    <?php echo flash('success') ?>
+                                </div>
+                            <?php } ?>
+                        </div>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Nama Petugas</th>
+                                    <th>Nama Siswa</th>
+                                    <th>Tanggal Bayar</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($payments as $payment) { ?>
+                                    <tr>
+                                        <td><?php echo $iteration++ ?></td>
+                                        <th><?php echo $payment['officers_name'] ?? 'Admin' ?></th>
+                                        <td><?php echo $payment['student_name'] ?></td>
+                                        <td><?php echo $payment['date_payment'] ?></td>
+                                        <td>
+                                            <div class="d-flex align-items-center" style="gap: 1rem">
+                                                <a href="<?php echo url('payments/detail?id=' . $payment['id']) ?>" class="btn btn-info">
+                                                    <i class="fas fa-eye"></i>
+                                                </a>
+                                        </td>
+                                    </tr>
+                                <?php } ?>
+                            </tbody>
+                        </table>
+                    </div>
+
+
+                </div>
 
         </section>
     </div>
@@ -232,46 +266,60 @@ $iteration = 1;
 
             <div class="row">
 
+                <div class="col-12">
 
-                <div class="<?php echo $user['role'] === 'student' ? 'col-md-6' : 'col-12' ?>">
+                    <div class="<?php echo $user['role'] === 'student' ? 'col-md-12' : 'col-12' ?>">
 
-                    <div class="card">
-                        <div class="card-header">
-                            <h4>Profile</h4>
-                        </div>
-                        <div class="card-body">
-
-                            <?php if (hasFlash('success')) { ?>
-                                <div class="alert alert-success">
-                                    <?php echo flash('success') ?>
-                                </div>
-                            <?php } ?>
-
-
-                            <div class="table-responsive">
-                                <table class="table table-bordered">
-                                    <tr>
-                                        <th>Nama</th>
-                                        <td class="border-top border-light"><?php echo $user['name'] ?></td>
-                                    </tr>
-                                    <tr>
-                                        <th>kelas</th>
-                                        <td class="border-top border-light"><?php echo $user['class_name'] ?> </td>
-                                    </tr>
-                                    <tr>
-                                        <th>kompetensi Keahlian</th>
-                                        <td class="border-top border-light"><?php echo $user['class_category'] ?> </td>
-                                    </tr>
-                                </table>
+                        <div class="card">
+                            <div class="card-header">
+                                <h4>History</h4>
                             </div>
+                            <div class="card-body">
 
+                                <?php if (hasFlash('success')) { ?>
+                                    <div class="alert alert-success">
+                                        <?php echo flash('success') ?>
+                                    </div>
+                                <?php } ?>
+
+
+                                <div class="table-responsive">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>No</th>
+                                                <th>Nama Petugas</th>
+                                                <th>Nama Siswa</th>
+                                                <th>Tanggal Bayar</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php foreach ($payments as $payment) { ?>
+                                                <tr>
+                                                    <td><?php echo $iteration++ ?></td>
+                                                    <th><?php echo $payment['officers_name'] ?? 'Admin' ?></th>
+                                                    <td><?php echo $payment['student_name'] ?></td>
+                                                    <td><?php echo $payment['date_payment'] ?></td>
+                                                    <td>
+                                                        <div class="d-flex align-items-center" style="gap: 1rem">
+                                                            <a href="<?php echo url('payments/detail?id=' . $payment['id']) ?>" class="btn btn-info">
+                                                                <i class="fas fa-eye"></i>
+                                                            </a>
+                                                    </td>
+                                                </tr>
+                                            <?php } ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
                         </div>
+
                     </div>
 
                 </div>
-
             </div>
-
         </section>
     </div>
 

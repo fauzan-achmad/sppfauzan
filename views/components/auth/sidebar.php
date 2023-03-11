@@ -71,7 +71,7 @@
                 <li class="menu-header">Laporan</li>
 
                 <li>
-                    <a class="nav-link" href="<?php echo url('spp') ?>">
+                    <a class="nav-link" href="<?php echo url('reports') ?>">
                         <i class="fas fa-file"></i>
                         <span>Laporan</span>
                     </a>

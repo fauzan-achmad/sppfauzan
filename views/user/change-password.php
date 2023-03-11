@@ -17,7 +17,7 @@
                             </div>
                         <?php } ?>
 
-                        <form action="<?php echo url('actions/students/change') ?>" method="POST">
+                        <form action="<?php echo url('actions/user/change') ?>" method="POST">
 
                             <input type="hidden" name="id" value="<?php echo $id ?>">
 
