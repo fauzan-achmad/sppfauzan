@@ -251,6 +251,30 @@ $iteration = 1;
 
 <?php } elseif ($_SESSION['user']['role'] === 'student') { ?> <!-- Jika role user selain admin -->
 
+    <?php
+
+    $payments = [];
+
+    $userId = $_SESSION['user']['id'];
+
+    $query = $connection->execute_query("SELECT 
+    payments.*, students.*, 
+    students.name AS student_name, 
+    officers.name AS officers_name 
+    FROM payments 
+    LEFT JOIN students ON payments.student_id = students.id 
+    LEFT JOIN officers ON payments.officer_id = officers.id 
+    LEFT JOIN users ON students.user_id = users.id 
+    WHERE users.id = ?
+    ", [$userId]);
+
+    while ($row = $query->fetch_assoc()) {
+
+        array_push($payments, $row);
+    }
+
+    ?>
+
     <div class="navbar-bg"></div>
 
     <!-- Topbar -->
