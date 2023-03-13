@@ -15,7 +15,6 @@ officers.name AS officers_name
  FROM payments
  LEFT JOIN students ON payments.student_id = students.id
  LEFT JOIN officers ON payments.officer_id = officers.id 
- WHERE payments.created_at >= CURRENT_DATE() 
  ORDER BY payments.id DESC");
 
 while ($row = $result->fetch_assoc()) {

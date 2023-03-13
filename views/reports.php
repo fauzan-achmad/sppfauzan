@@ -14,6 +14,7 @@ class.name AS class_name,
 class.category AS class_category
  FROM students
  LEFT JOIN class ON students.class_id = class.id
+ WHERE students.created_at >= CURRENT_DATE()
  ORDER BY students.id DESC");
 
 while ($row = $result->fetch_assoc()) {
@@ -24,7 +25,7 @@ while ($row = $result->fetch_assoc()) {
 
 $class = [];
 
-$result1 = $connection->execute_query("SELECT * FROM class ORDER BY id DESC");
+$result1 = $connection->execute_query("SELECT * FROM class WHERE class.created_at >= CURRENT_DATE()");
 
 while ($row = $result1->fetch_assoc()) {
 
@@ -33,7 +34,7 @@ while ($row = $result1->fetch_assoc()) {
 
 $officers = [];
 
-$result2 = $connection->execute_query("SELECT * FROM officers");
+$result2 = $connection->execute_query("SELECT * FROM officers WHERE officers.created_at >= CURRENT_DATE()");
 
 while ($row = $result2->fetch_assoc()) {
 
@@ -42,13 +43,32 @@ while ($row = $result2->fetch_assoc()) {
 
 $spps = [];
 
-$result3 = $connection->execute_query("SELECT * FROM spps");
+$result3 = $connection->execute_query("SELECT * FROM spps WHERE spps.created_at >= CURRENT_DATE()");
 
 while ($row = $result3->fetch_assoc()) {
 
     array_push($spps, $row);
 }
 
+$payments = [];
+
+$result = $connection->execute_query("SELECT payments.*,
+students.name AS student_name,
+officers.name AS officers_name
+ FROM payments
+ LEFT JOIN students ON payments.student_id = students.id
+ LEFT JOIN officers ON payments.officer_id = officers.id 
+ WHERE payments.created_at >= CURRENT_DATE()
+ ORDER BY payments.id DESC");
+
+while ($row = $result->fetch_assoc()) {
+
+    array_push($payments, $row);
+}
+
+
+
+$piteration = 1;
 $siteration = 1;
 $oiteration = 1;
 $iteration = 1;
@@ -79,7 +99,7 @@ $citeration = 1;
                 </div>
             </div>
 
-            <div class="col-md-8 row-span-2">
+            <div class="col-md-6 row-span-2">
                 <div class="card ">
                     <div class="card-header d-flex justify-content-between align-items-center">
                         <h4>Daftar siswa</h4>
@@ -116,7 +136,7 @@ $citeration = 1;
                 </div>
             </div>
 
-            <div class="col-md-4 row-span-2">
+            <div class="col-md-6 row-span-2">
                 <div class="card">
                     <div class="card-header d-flex justify-content-between align-items-center">
                         <h4>Daftar petugas</h4>
@@ -184,6 +204,7 @@ $citeration = 1;
                 </div>
 
             </div>
+
             <div class="col-6">
                 <div class="card">
                     <div class="card-header d-flex justify-content-between align-items-center">
@@ -204,7 +225,7 @@ $citeration = 1;
                                 <tbody>
                                     <?php foreach ($spps as $spp) { ?>
                                         <tr>
-                                            <td><?php echo $iteration++ ?></td>
+                                            <td><?php echo $siteration++ ?></td>
                                             <td><?php echo $spp['year'] ?></td>
                                             <td>RP.<?php echo number_format($spp['nominal']) ?></td>
                                         </tr>
@@ -217,6 +238,46 @@ $citeration = 1;
                 </div>
             </div>
 
+            <div class="col-12">
+                <div class="card ">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h4>History Pembayaran</h4>
+                    </div>
+                    <div class="card-body">
+
+                        <?php if (hasFlash('success')) { ?>
+                            <div class="alert alert-success">
+                                <?php echo flash('success') ?>
+                            </div>
+                        <?php } ?>
+
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Nama Petugas</th>
+                                        <th>Nama Siswa</th>
+                                        <th>Tanggal Bayar</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php foreach ($payments as $payment) { ?>
+                                        <tr>
+                                            <td><?php echo $piteration++ ?></td>
+                                            <th><?php echo $payment['officers_name'] ?? 'Admin' ?></th>
+                                            <td><?php echo $payment['student_name'] ?></td>
+                                            <td><?php echo $payment['date_payment'] ?></td>
+
+                                        </tr>
+                                    <?php } ?>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 

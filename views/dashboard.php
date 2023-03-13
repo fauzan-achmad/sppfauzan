@@ -210,38 +210,33 @@ $iteration = 1;
                                     <?php echo flash('success') ?>
                                 </div>
                             <?php } ?>
+
+
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Nama Petugas</th>
+                                            <th>Nama Siswa</th>
+                                            <th>Tanggal Bayar</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php foreach ($payments as $payment) { ?>
+                                            <tr>
+                                                <td><?php echo $iteration++ ?></td>
+                                                <th><?php echo $payment['officers_name'] ?? 'Admin' ?></th>
+                                                <td><?php echo $payment['student_name'] ?></td>
+                                                <td><?php echo $payment['date_payment'] ?></td>
+                                            </tr>
+                                        <?php } ?>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="table-responsive">
-                        <table class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>No</th>
-                                    <th>Nama Petugas</th>
-                                    <th>Nama Siswa</th>
-                                    <th>Tanggal Bayar</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php foreach ($payments as $payment) { ?>
-                                    <tr>
-                                        <td><?php echo $iteration++ ?></td>
-                                        <th><?php echo $payment['officers_name'] ?? 'Admin' ?></th>
-                                        <td><?php echo $payment['student_name'] ?></td>
-                                        <td><?php echo $payment['date_payment'] ?></td>
-                                        <td>
-                                            <div class="d-flex align-items-center" style="gap: 1rem">
-                                                <a href="<?php echo url('payments/detail?id=' . $payment['id']) ?>" class="btn btn-info">
-                                                    <i class="fas fa-eye"></i>
-                                                </a>
-                                        </td>
-                                    </tr>
-                                <?php } ?>
-                            </tbody>
-                        </table>
-                    </div>
 
 
                 </div>
@@ -258,6 +253,7 @@ $iteration = 1;
     $userId = $_SESSION['user']['id'];
 
     $query = $connection->execute_query("SELECT 
+    payments.id AS payment_id,
     payments.*, students.*, 
     students.name AS student_name, 
     officers.name AS officers_name 
@@ -327,7 +323,7 @@ $iteration = 1;
                                                     <td><?php echo $payment['date_payment'] ?></td>
                                                     <td>
                                                         <div class="d-flex align-items-center" style="gap: 1rem">
-                                                            <a href="<?php echo url('payments/detail?id=' . $payment['id']) ?>" class="btn btn-info">
+                                                            <a href="<?php echo url('payments/detail?id=' . $payment['payment_id']) ?>" class="btn btn-info">
                                                                 <i class="fas fa-eye"></i>
                                                             </a>
                                                     </td>

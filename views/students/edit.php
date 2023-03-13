@@ -93,7 +93,7 @@ if (!$student) {
                             <div class="form-group col-md-6">
                                 <label>kelas</label>
                                 <select class="form-control selectric" name="class_id" required>
-                                    <option selected disabled>Pilih kelas</option>
+                                    <option selected disabled><?php echo $student['class_name'] ?> - <?php echo $student['class_category'] ?></option>
                                     <?php foreach ($class as $clas) { ?>
                                         <option value="<?php echo $clas['id'] ?>">
                                             <?php echo $clas['name'] ?> -
@@ -111,6 +111,19 @@ if (!$student) {
                                 <input type="text" class="form-control " name="phone" value="<?php echo $student['phone'] ?>" required>
                                 <div class="invalid-feedback">
                                     Silahkan isi Telepon.
+                                </div>
+                            </div>
+
+
+                            <div class="form-group col-md-6">
+                                <label>Jenis Kelamin</label>
+                                <select class="form-control selectric" name="gender" required>
+                                    <option selected disabled><?php echo $student['gender'] ?></option>
+                                    <option value="Laki-Laki"> Laki - Laki </option>
+                                    <option value="Perempuan">Perempuan</option>
+                                </select>
+                                <div class="invalid-feedback">
+                                    Silahkan isi pilih Jenis Kelamin.
                                 </div>
                             </div>
 

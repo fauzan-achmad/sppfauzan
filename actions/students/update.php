@@ -19,19 +19,22 @@ $nisn = htmlspecialchars($_POST['nisn'] ?? null);
 $nis = htmlspecialchars($_POST['nis'] ?? null);
 $name = htmlspecialchars($_POST['name'] ?? null);
 $phone = htmlspecialchars($_POST['phone'] ?? null);
+$gender = htmlspecialchars($_POST['gender'] ?? null);
 $address = htmlspecialchars($_POST['address'] ?? null);
 $class_id = htmlspecialchars($_POST['class_id'] ?? null);
 
 $nis = $nis !== "" ? $nis : null;
 
 $query = $connection->execute_query("UPDATE users SET 
-        name = '$name', username = 'S$nisn'
+        name = '$name', username = 'S$nis'
         WHERE id = ?", [$userId]);
 $query = $connection->execute_query("UPDATE students SET 
 nisn = '$nisn', 
 nis = ?, 
 name = '$name', 
-phone = '$phone', 
+phone = '$phone',
+gender = '$gender',
+address = '$address',
 class_id = '$class_id', 
 user_id = '$userId'
 WHERE id = ?", [$nis, $studentId]);

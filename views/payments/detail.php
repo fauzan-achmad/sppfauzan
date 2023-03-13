@@ -3,30 +3,33 @@
 global $connection;
 
 $id = (int) $_GET['id'];
-
+$userId = $_SESSION['user']['id'];
 
 $result = $connection->execute_query("SELECT payments.*,
 students.name AS student_name,
 students.nis AS student_nis,
 officers.name AS officer_name,
 spps.nominal AS spp_nominal,
-class.*, class.id AS class_id, class.name AS class_name, class.category AS class_category
+class.*, class.id AS class_id, class.name AS class_name, class.category AS class_category, 
+users.id AS user_id 
  FROM payments
  LEFT JOIN officers ON payments.officer_id = officers.id
  LEFT JOIN students ON payments.student_id = students.id
  LEFT JOIN class ON students.class_id = class.id
- LEFT JOIN spps ON payments.spp_id = spps.id
+ LEFT JOIN spps ON payments.spp_id = spps.id 
+ JOIN users ON students.user_id = users.id 
  WHERE payments.id = ?
  LIMIT 1", [$id]);
 
-
-
 $payment = $result->fetch_assoc();
 
-if (!$payment) {
+if ($_SESSION['user']['role'] != 'admin' && $_SESSION['user']['role'] != 'officer') {
 
-    header('Location: ' . env('APP_URL') . '/404');
-    die();
+    if (!$payment || $userId != $payment['user_id']) {
+
+        header('Location: ' . env('APP_URL') . '/404');
+        die();
+    }
 }
 
 $literation = 1;
@@ -76,7 +79,7 @@ $literation = 1;
                                 </tr>
                                 <tr>
                                     <th>Jumlah Spp</th>
-                                    <td class="border-top border-light"><?php echo $payment['spp_nominal'] ?? '-' ?></td>
+                                    <td class="border-top border-light">RP. <?php echo number_format($payment['spp_nominal']) ?? '-' ?></td>
                                 </tr>
 
                             </table>
@@ -86,6 +89,7 @@ $literation = 1;
                                         <tr>
                                             <th scope="col">No</th>
                                             <th scope="col">Tanggal Bayar</th>
+                                            <th scope="col">Bulan Dibayar</th>
                                             <th scope="col">Nominal</th>
                                             <th scope="col">Keterangan</th>
                                         </tr>
@@ -94,8 +98,9 @@ $literation = 1;
                                         <tr>
                                             <td><?php echo $literation++ ?></td>
                                             <td><?php echo $payment['date_payment'] ?></td>
-                                            <td>RP. <?php echo number_format($payment['payment_amount']) ?> </td>
                                             <td><?php echo $payment['month_paid'] ?></td>
+                                            <td>RP. <?php echo number_format($payment['payment_amount']) ?> </td>
+                                            <td></td>
                                         </tr>
                                     </tbody>
                                 </table>

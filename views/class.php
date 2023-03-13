@@ -9,7 +9,7 @@ global $connection;
 
 $class = [];
 
-$result = $connection->execute_query("SELECT * FROM class ORDER BY id DESC");
+$result = $connection->execute_query("SELECT * FROM class ORDER BY category DESC");
 
 while ($row = $result->fetch_assoc()) {
 

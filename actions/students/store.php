@@ -8,8 +8,9 @@ $name = htmlspecialchars($_POST['name'] ?? null);
 $phone = htmlspecialchars($_POST['phone'] ?? null);
 $address = htmlspecialchars($_POST['address'] ?? null);
 $class_id = htmlspecialchars($_POST['class_id'] ?? null);
+$gender = htmlspecialchars($_POST['gender'] ?? null);
 
-$username = "S$nisn";
+$username = "S$nis";
 
 // var_dump($username);
 // die();
@@ -51,8 +52,8 @@ $query = $connection->execute_query("INSERT INTO users (name, username, password
 $userId = $connection->insert_id;
 
 $query = $connection->execute_query("INSERT INTO students (
-    nisn, nis, name,address, phone, class_id, user_id
-) VALUES (?, ?, ?, ?, ?, ?,?)", [$nisn, $nis, $name, $address, $phone, $class_id, $connection->insert_id]);
+    nisn, nis, name,address, phone, gender, class_id, user_id
+) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", [$nisn, $nis, $name, $address, $phone, $gender, $class_id, $connection->insert_id]);
 
 
 

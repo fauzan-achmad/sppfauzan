@@ -101,6 +101,18 @@ while ($row = $result->fetch_assoc()) {
                                 </div>
                             </div>
 
+                            <div class="form-group col-md-6">
+                                <label>Jenis Kelamin</label>
+                                <select class="form-control selectric" name="gender" required>
+                                    <option selected disabled>Pilih Jenis Kelamin</option>
+                                    <option value="Laki-Laki"> Laki - Laki </option>
+                                    <option value="Perempuan">Perempuan</option>
+                                </select>
+                                <div class="invalid-feedback">
+                                    Silahkan isi pilih Jenis Kelamin.
+                                </div>
+                            </div>
+
                             <div class="form-group col-6">
                                 <label>Alamat</label>
                                 <textarea class="form-control" name="address" rows="3" required></textarea>

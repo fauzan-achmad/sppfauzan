@@ -72,6 +72,12 @@ if (!$student) {
                                     </td>
                                 </tr>
                                 <tr>
+                                    <th>Jenis Kelamin</th>
+                                    <td class="border-top border-light">
+                                        : <?php echo $student['gender'] ?? '-' ?>
+                                    </td>
+                                </tr>
+                                <tr>
                                     <th>Nomor Telepon</th>
                                     <td class="border-top border-light">
                                         : <?php echo $student['phone'] ?? '-' ?>

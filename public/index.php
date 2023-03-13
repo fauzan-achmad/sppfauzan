@@ -167,6 +167,7 @@ $guardedPages = [
 
 $adminOrOfficerPages = [
     '/payments',
+    '/payments/create',
     '/history',
 ];
 
@@ -198,10 +199,7 @@ $adminPages = [
     '/spps/create',
     '/spps/edit',
     '/spps/detail',
-    '/payments',
-    '/payments/create',
     '/payments/edit',
-    '/payments/detail',
     '/class',
     '/class/create',
     '/class/edit',
