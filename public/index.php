@@ -168,6 +168,7 @@ $guardedPages = [
 $adminOrOfficerPages = [
     '/payments',
     '/payments/create',
+    '/payments/delete',
     '/history',
 ];
 
@@ -310,6 +311,11 @@ $actions = [
 
     '/actions/payments/store' => function () {
         require_once __DIR__ . '/../actions/payments/store.php';
+        die();
+    },
+
+    '/actions/payments/delete' => function () {
+        require_once __DIR__ . '/../actions/payments/delete.php';
         die();
     },
 ];

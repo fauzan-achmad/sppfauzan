@@ -77,6 +77,7 @@ $iteration = 1;
                                                     <a href="<?php echo url('officers/edit?id=' . $officer['id']) ?>" class="btn btn-warning">
                                                         <i class="fas fa-pen"></i>
                                                     </a>
+                                                    |
                                                     <form action="<?php echo url('actions/officers/delete') ?>" method="post">
                                                         <input type="hidden" name="user_id" value="<?php echo $officer['user_id'] ?>">
                                                         <button type="submit" class="btn btn-danger" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">

@@ -74,12 +74,13 @@ $iteration = 1;
                                             <td>
                                                 <div class="d-flex align-items-center" style="gap: 1rem">
 
-                                                    <a href="<?php echo url('spps/edit?id=' . $spp['id']) ?>" class="btn btn-light">
+                                                    <a href="<?php echo url('spps/edit?id=' . $spp['id']) ?>" class="btn btn-warning">
                                                         <i class="fas fa-pen"></i>
                                                     </a>
+                                                    |
                                                     <form action="<?php echo url('actions/spps/delete') ?>" method="post">
                                                         <input type="hidden" name="id" value="<?php echo $spp['id'] ?>">
-                                                        <button type="submit" class="btn btn-light" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">
+                                                        <button type="submit" class="btn btn-danger" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">
                                                             <i class="fas fa-trash"></i>
                                                         </button>
                                                     </form>

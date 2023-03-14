@@ -23,6 +23,7 @@ users.id AS user_id
 
 $payment = $result->fetch_assoc();
 
+
 if ($_SESSION['user']['role'] != 'admin' && $_SESSION['user']['role'] != 'officer') {
 
     if (!$payment || $userId != $payment['user_id']) {

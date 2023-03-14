@@ -78,6 +78,14 @@ $iteration = 1;
                                                     <a href="<?php echo url('payments/detail?id=' . $payment['id']) ?>" class="btn btn-info">
                                                         <i class="fas fa-eye"></i>
                                                     </a>
+                                                    |
+                                                    <form action="<?php echo url('actions/payments/delete') ?>" method="post">
+                                                        <input type="hidden" name="id" value="<?php echo $payment['id'] ?>">
+                                                        <button type="submit" class="btn btn-danger" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">
+                                                            <i class="fas fa-trash"></i>
+                                                        </button>
+                                                    </form>
+                                                </div>
                                             </td>
                                         </tr>
                                     <?php } ?>

@@ -92,10 +92,11 @@ $iteration = 1;
                                                     <a href="<?php echo url('students/detail?id=' . $student['id']) ?>" class="btn btn-info">
                                                         <i class="fas fa-eye"></i>
                                                     </a>
-
+                                                    |
                                                     <a href="<?php echo url('students/edit?id=' . $student['id']) ?>" class="btn btn-warning">
                                                         <i class="fas fa-pen"></i>
                                                     </a>
+                                                    |
                                                     <form action="<?php echo url('actions/students/delete') ?>" method="post">
                                                         <input type="hidden" name="user_id" value="<?php echo $student['user_id'] ?>">
                                                         <button type="submit" class="btn btn-danger" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">
