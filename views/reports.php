@@ -7,6 +7,8 @@ global $connection;
  * 
  */
 
+$date = $_GET['date'] ?? '';
+
 $students = [];
 
 $result = $connection->execute_query("SELECT students.*,
@@ -14,7 +16,7 @@ class.name AS class_name,
 class.category AS class_category
  FROM students
  LEFT JOIN class ON students.class_id = class.id
- WHERE students.created_at >= CURRENT_DATE()
+ WHERE students.created_at >= IF('$date' != '', '$date', CURRENT_DATE())
  ORDER BY students.id DESC");
 
 while ($row = $result->fetch_assoc()) {
@@ -22,10 +24,9 @@ while ($row = $result->fetch_assoc()) {
     array_push($students, $row);
 }
 
-
 $class = [];
 
-$result1 = $connection->execute_query("SELECT * FROM class WHERE class.created_at >= CURRENT_DATE()");
+$result1 = $connection->execute_query("SELECT * FROM class WHERE class.created_at >= IF('$date' != '', '$date', CURRENT_DATE())");
 
 while ($row = $result1->fetch_assoc()) {
 
@@ -34,7 +35,7 @@ while ($row = $result1->fetch_assoc()) {
 
 $officers = [];
 
-$result2 = $connection->execute_query("SELECT * FROM officers WHERE officers.created_at >= CURRENT_DATE()");
+$result2 = $connection->execute_query("SELECT * FROM officers WHERE officers.created_at >= IF('$date' != '', '$date', CURRENT_DATE())");
 
 while ($row = $result2->fetch_assoc()) {
 
@@ -43,7 +44,7 @@ while ($row = $result2->fetch_assoc()) {
 
 $spps = [];
 
-$result3 = $connection->execute_query("SELECT * FROM spps WHERE spps.created_at >= CURRENT_DATE()");
+$result3 = $connection->execute_query("SELECT * FROM spps WHERE spps.created_at >= IF('$date' != '', '$date', CURRENT_DATE())");
 
 while ($row = $result3->fetch_assoc()) {
 
@@ -58,7 +59,7 @@ officers.name AS officers_name
  FROM payments
  LEFT JOIN students ON payments.student_id = students.id
  LEFT JOIN officers ON payments.officer_id = officers.id 
- WHERE payments.created_at >= CURRENT_DATE()
+ WHERE payments.created_at >= IF('$date' != '', '$date', CURRENT_DATE())
  ORDER BY payments.id DESC");
 
 while ($row = $result->fetch_assoc()) {
@@ -93,8 +94,14 @@ $citeration = 1;
 
             <div class="col-12">
                 <div class="card card-success">
-                    <div class="card-header">
+                    <div class="card-header d-flex justify-content-between align-items-center">
                         <h4>Reports</h4>
+                        <div class="d-flex align-items-center" style="gap: 1rem;">
+                            <form class="d-flex align-items-center" style="gap: 1rem;">
+                                <input type="date" class="form-control" name="date" value="<?php echo $_GET['date'] ?? '' ?>" placeholder="Cari siswa . . .">
+                                <button type="submit" class="btn btn-primary">Search</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>

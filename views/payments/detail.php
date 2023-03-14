@@ -91,7 +91,7 @@ $literation = 1;
                                             <th scope="col">Tanggal Bayar</th>
                                             <th scope="col">Bulan Dibayar</th>
                                             <th scope="col">Nominal</th>
-                                            <th scope="col">Keterangan</th>
+                                            <th scope="col">Sisa Pembayaran</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -100,7 +100,7 @@ $literation = 1;
                                             <td><?php echo $payment['date_payment'] ?></td>
                                             <td><?php echo $payment['month_paid'] ?></td>
                                             <td>RP. <?php echo number_format($payment['payment_amount']) ?> </td>
-                                            <td></td>
+                                            <td><?php echo $payment['remaining_pay'] == 0 ? 'Lunas' : 'Rp. ' . number_format($payment['remaining_pay']) ?></td>
                                         </tr>
                                     </tbody>
                                 </table>

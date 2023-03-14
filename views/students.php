@@ -7,13 +7,16 @@ global $connection;
  * 
  */
 
+$q = $_GET['q'] ?? '';
+
 $students = [];
 
 $result = $connection->execute_query("SELECT students.*,
 class.name AS class_name,
-class.category AS class_category
- FROM students
- LEFT JOIN class ON students.class_id = class.id
+class.category AS class_category 
+ FROM students 
+ LEFT JOIN class ON students.class_id = class.id 
+ WHERE students.name LIKE '%$q%' OR students.nis LIKE '%$q%' OR class.category LIKE '%$q%' 
  ORDER BY students.id DESC");
 
 while ($row = $result->fetch_assoc()) {
@@ -45,8 +48,12 @@ $iteration = 1;
                 <div class="card ">
                     <div class="card-header d-flex justify-content-between align-items-center">
                         <h4>Daftar siswa</h4>
-                        <div>
-                            <a href="<?php echo url('students/create') ?>" class="btn btn-primary">
+                        <div class="d-flex align-items-center" style="gap: 1rem;">
+                            <form class="d-flex align-items-center" style="gap: 1rem;">
+                                <input type="text" class="form-control" name="q" value="<?php echo $_GET['q'] ?? '' ?>" placeholder="Cari siswa . . .">
+                                <button type="submit" class="btn btn-primary">Search</button>
+                            </form>
+                            <a href="<?php echo url('students/create') ?>" class="d-block btn btn-primary">
                                 <i class="fas fa-plus"></i>
                                 <span>Tambah siswa</span>
                             </a>
