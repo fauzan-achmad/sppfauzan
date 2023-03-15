@@ -208,15 +208,6 @@ $adminPages = [
     '/reports'
 ];
 
-/**
- * Daftar halaman yang hanya boleh diakses oleh officer.
- * 
- */
-
-// $officerPages = [
-//     '/payments',
-
-// ];
 
 
 /**
@@ -224,9 +215,6 @@ $adminPages = [
  * 
  */
 
-// $studentPages = [
-//     '/history',
-// ];
 /**
  * Daftar aksi-aksi pada aplikasi ini.
  * 
@@ -320,41 +308,6 @@ $actions = [
     },
 ];
 
-/**
- * Cek apakah user dengan role officer memiliki relasi dengan table officer.
- * Jika tidak memiliki relasi dengan table officer, maka delete user.
- * 
- */
-
-// if (isset($_SESSION['user']) && $_SESSION['user']['role'] === 'officer') {
-
-//     $userId = $_SESSION['user']['id'];
-
-//     $result = $connection->execute_query("SELECT * FROM officers WHERE user_id = ?", [$userId]);
-//     $officer = $result->fetch_assoc();
-
-//     if (!$officer) {
-
-//         $query = $connection->execute_query("DELETE FROM users WHERE id = ?", [$userId]);
-
-//         unset($_SESSION['user']);
-//     }
-// }
-
-// if (isset($_SESSION['user']) && $_SESSION['user']['role'] === 'student') {
-
-//     $userId = $_SESSION['user']['id'];
-
-//     $result = $connection->execute_query("SELECT * FROM students WHERE user_id = ?", [$userId]);
-//     $student = $result->fetch_assoc();
-
-//     if (!$student) {
-
-//         $query = $connection->execute_query("DELETE FROM users WHERE id = ?", [$userId]);
-
-//         unset($_SESSION['user']);
-//     }
-// }
 
 /**
  * Memuat halaman sesuai request url yang diberikan.
@@ -362,6 +315,12 @@ $actions = [
  */
 
 if ($url !== '/') {
+
+    if ($url == '/print') {
+
+        require_once __DIR__ . '/../views/print.php';
+        die();
+    }
 
     /**
      * Cek apakah user mengakses sebuah aksi atau tidak.
@@ -438,24 +397,6 @@ if ($url !== '/') {
             die();
         }
     }
-
-    // if (in_array($url, $officerPages)) {
-
-    //     if (isset($_SESSION['user']) && $_SESSION['user']['role'] !== 'officer') {
-
-    //         header('Location: ' . env('APP_URL') . '/403');
-    //         die();
-    //     }
-    // }
-
-    // if (in_array($url, $studentPages)) {
-
-    //     if (isset($_SESSION['user']) && $_SESSION['user']['role'] !== 'student') {
-
-    //         header('Location: ' . env('APP_URL') . '/403');
-    //         die();
-    //     }
-    // }
 
     /**
      * Cek ketersediaan file.

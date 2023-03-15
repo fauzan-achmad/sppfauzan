@@ -249,14 +249,11 @@ $citeration = 1;
                 <div class="card ">
                     <div class="card-header d-flex justify-content-between align-items-center">
                         <h4>History Pembayaran</h4>
+                        <div>
+                            <a class="btn btn-primary" href="<?php echo url('/print') ?>">Print</a>
+                        </div>
                     </div>
                     <div class="card-body">
-
-                        <?php if (hasFlash('success')) { ?>
-                            <div class="alert alert-success">
-                                <?php echo flash('success') ?>
-                            </div>
-                        <?php } ?>
 
                         <div class="table-responsive">
                             <table class="table table-striped">
